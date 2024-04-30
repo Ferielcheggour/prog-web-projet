@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mon-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mon-backend
+  template:
+    metadata:
+      labels:
+        app: mon-backend
+    spec:
+      containers:
+        - image: feriellefifi/mon-backend:1
+          imagePullPolicy: Always
+          name: mon-backend
+      restartPolicy: Always
+

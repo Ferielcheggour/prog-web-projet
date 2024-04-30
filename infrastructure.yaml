@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mon-backend
+  labels:
+    app: mon-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mon-backend
+  template:
+    metadata:
+      labels:
+        app: mon-backend
+    spec:
+      containers:
+        - name: mon-backend
+          image: feriellefifi/mon-backend:latest
+          imagePullPolicy: Always  
+          ports:
+            - containerPort: 3000
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mon-backend  
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app: mon-backend
+  type: NodePort  
